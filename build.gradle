@@ -25,3 +25,20 @@ dependencies {
             "io.cucumber:cucumber-guice:$cucumberVersion",
             "io.cucumber:cucumber-java8:$cucumberVersion"
 }
+
+task runTests(type: Test) {
+    def htmlReportPath = 'build/cucumber/report'
+    jvmArgs '-Dcucumber.options= ' +
+            '--plugin pretty ' +
+            '--plugin json:build/cucumber/cucumber.json ' +
+            "--plugin html:$htmlReportPath"
+
+    testLogging {
+        events "skipped", "failed", "passed", "standard_out"
+    }
+
+    doLast {
+        logger.lifecycle "See Cucumber report at $projectDir/$htmlReportPath/index.html"
+        logger.lifecycle "See also standard gradle report at ${reports.html.entryPoint.toString()}"
+    }
+}
