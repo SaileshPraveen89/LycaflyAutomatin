@@ -1,4 +1,4 @@
-package my.booking.config;
+package my.booking;
 
 import java.util.Arrays;
 

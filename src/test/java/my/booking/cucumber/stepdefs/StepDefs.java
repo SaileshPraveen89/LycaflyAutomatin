@@ -1,4 +1,4 @@
-package my.booking.stepdefs;
+package my.booking.cucumber.stepdefs;
 
 import org.openqa.selenium.WebDriver;
 

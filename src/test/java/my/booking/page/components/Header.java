@@ -9,8 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.inject.Inject;
-import my.booking.config.Currency;
-import my.booking.config.Language;
+import my.booking.Currency;
+import my.booking.Language;
 
 public class Header {
 
