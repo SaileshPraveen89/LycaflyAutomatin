@@ -19,6 +19,7 @@ ext {
 dependencies {
     compile "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
     compile "com.google.inject:guice:4.2.0"
+    compile "io.github.bonigarcia:webdrivermanager:2.1.0"
     compile "io.cucumber:cucumber-java:$cucumberVersion",
             "io.cucumber:cucumber-junit:$cucumberVersion",
             "io.cucumber:cucumber-guice:$cucumberVersion",
