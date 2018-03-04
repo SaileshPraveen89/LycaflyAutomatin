@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "com.github.spacialcircumstances.gradle-cucumber-reporting" version "0.0.6"
 }
 
 group = 'test-automation'
@@ -9,6 +10,7 @@ description = "Test automation project for booking.com"
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 ext {
@@ -26,19 +28,22 @@ dependencies {
             "io.cucumber:cucumber-java8:$cucumberVersion"
 }
 
+def cucumberReportPath = 'build/cucumber/report'
+def cucumberReportJsonPath = "$cucumberReportPath/cucumber.json"
+
+cucumberReports {
+    outputDir = cucumberReportPath
+    reports = files(cucumberReportJsonPath)
+}
+
 task runTests(type: Test) {
-    def htmlReportPath = 'build/cucumber/report'
     jvmArgs '-Dcucumber.options= ' +
             '--plugin pretty ' +
-            '--plugin json:build/cucumber/cucumber.json ' +
-            "--plugin html:$htmlReportPath"
+            "--plugin json:$cucumberReportJsonPath " +
+            "--plugin html:$cucumberReportPath"
 
     testLogging {
         events "skipped", "failed", "passed", "standard_out"
     }
 
-    doLast {
-        logger.lifecycle "See Cucumber report at $projectDir/$htmlReportPath/index.html"
-        logger.lifecycle "See also standard gradle report at ${reports.html.entryPoint.toString()}"
-    }
 }
