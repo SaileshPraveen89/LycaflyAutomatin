@@ -1,6 +1,6 @@
-# booking-com-test-automation
+[![Build Status](https://travis-ci.org/serzhshakur/booking-com-test-automation.svg?branch=master)](https://travis-ci.org/serzhshakur/booking-com-test-automation)
 
-Test automation project for booking.com website written in Java and Selenium
+Test automation project for [booking.com](https://booking.com) website written in Java and Selenium
 
 #### Supported operating systems
 - Linux
@@ -40,3 +40,7 @@ gradlew.bat clean runTests
 
 ### Cucumber reports
 A pretty cucumber report is generated each time after tests being executed with Gradle task. [Gradle Cucumber Reporting plugin](https://github.com/SpacialCircumstances/gradle-cucumber-reporting) is used for that purpose. You'll be notified in command line about the location of a report.
+
+### Continuous integration
+This project has integration with travis-ci so each time a new code is pushed to repo a pipeline on Travis is automatically triggered and Cucumber tests are executed. The current state of a build is [![Build Status](https://travis-ci.org/serzhshakur/booking-com-test-automation.svg?branch=master)](https://travis-ci.org/serzhshakur/booking-com-test-automation)
+. You can also see the current status at a top of this readme.   
