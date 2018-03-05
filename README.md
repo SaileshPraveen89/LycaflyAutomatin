@@ -39,4 +39,4 @@ gradlew.bat clean runTests
 ```
 
 ### Cucumber reports
-Pretty cucumber report is generated each time after Gradle being executed. You'll be notified in command line about the location of a report.
+A pretty cucumber report is generated each time after tests being executed with Gradle task. [Gradle Cucumber Reporting plugin](https://github.com/SpacialCircumstances/gradle-cucumber-reporting) is used for that purpose. You'll be notified in command line about the location of a report.

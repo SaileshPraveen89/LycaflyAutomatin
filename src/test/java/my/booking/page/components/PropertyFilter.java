@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.inject.Inject;
 
-public class PropertiesFilter {
+public class PropertyFilter {
 
     private static By AVAILABLE_ONLY_ANCHOR = cssSelector("#filter_out_of_stock a");
 
@@ -20,9 +20,10 @@ public class PropertiesFilter {
     private WebDriver webDriver;
 
     private WebDriverWait wait;
+    
 
     @Inject
-    public PropertiesFilter(WebDriver webDriver, WebDriverWait wait) {
+    public PropertyFilter(WebDriver webDriver, WebDriverWait wait) {
         this.webDriver = webDriver;
         this.wait = wait;
     }

@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.google.inject.Inject;
 import cucumber.api.java8.En;
-import my.booking.page.components.PropertiesFilter;
+import my.booking.page.components.PropertyFilter;
 import my.booking.page.components.MainSearchForm;
 import my.booking.page.components.SearchResults;
 import my.booking.page.components.GiftPopup;
@@ -22,7 +22,7 @@ public class StepDefs implements En {
     private GiftPopup giftPopup;
 
     @Inject
-    private PropertiesFilter filter;
+    private PropertyFilter filter;
 
     @Inject
     private SearchResults searchResultsPage;
