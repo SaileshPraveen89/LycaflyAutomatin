@@ -43,4 +43,4 @@ A pretty cucumber report is generated each time after tests being executed with 
 
 ### Continuous integration
 This project has integration with travis-ci so each time a new code is pushed to repo a pipeline on Travis is automatically triggered and Cucumber tests are executed. The current state of a build is [![Build Status](https://travis-ci.org/serzhshakur/booking-com-test-automation.svg?branch=master)](https://travis-ci.org/serzhshakur/booking-com-test-automation)
-. You can also see the current status at a top of this readme.   
+. You can also see the current status at a top of this readme. A stable Chrome version in a headless mode is used for running tests on CI. 
