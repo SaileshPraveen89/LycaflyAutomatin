@@ -43,4 +43,9 @@ A pretty cucumber report is generated each time after tests being executed with 
 
 ### Continuous integration
 This project has integration with travis-ci so each time a new code is pushed to repo a pipeline on Travis is automatically triggered and Cucumber tests are executed. The current state of a build is [![Build Status](https://travis-ci.org/serzhshakur/booking-com-test-automation.svg?branch=master)](https://travis-ci.org/serzhshakur/booking-com-test-automation)
-. You can also see the current status at a top of this readme. A stable Chrome version in a headless mode is used for running tests on CI. 
+. You can also see the current status at a top of this readme. A stable Chrome version in a headless mode is used for running tests on CI.
+
+### Possible improvement areas
+- Use [Selenide](http://selenide.org/index.html) which brings better API for UI testing comparing to pure Selenium webdriver;
+- Run browsers in Docker containers and setup remote webdriver to connect them (Test Containers java library could be used for this purpose);
+- Try to implement the same functionality using some top-notch JavaScript techniques (like Puppeteer, Cypress.io etc.) 
