@@ -10,8 +10,12 @@ import cucumber.api.java.After;
 
 public class Hooks {
 
-    @Inject
     private WebDriver webDriver;
+
+    @Inject
+    Hooks(WebDriver webDriver) {
+        this.webDriver = webDriver;
+    }
 
     @After
     public void tearDown(Scenario scenario) {

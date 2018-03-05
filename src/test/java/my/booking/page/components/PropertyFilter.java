@@ -4,10 +4,10 @@ import static org.openqa.selenium.By.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.inject.Inject;
+import my.booking.utils.WebDriverUtils;
 
 public class PropertyFilter {
 
@@ -17,15 +17,14 @@ public class PropertyFilter {
 
     private static By FILTER_APPLIED_POPUP = cssSelector(".sr-filter-popup #sr-filter-descr");
 
-    private WebDriver webDriver;
+    private WebDriverUtils wdUtils;
 
     private WebDriverWait wait;
-    
 
     @Inject
-    public PropertyFilter(WebDriver webDriver, WebDriverWait wait) {
-        this.webDriver = webDriver;
+    public PropertyFilter(WebDriverUtils wdUtils, WebDriverWait wait) {
         this.wait = wait;
+        this.wdUtils = wdUtils;
     }
 
     public void chooseToShowAvailableOnly() {
@@ -37,8 +36,7 @@ public class PropertyFilter {
     }
 
     private void applyFilter(By elementLocator) {
-        wait.until(elementToBeClickable(elementLocator));
-        webDriver.findElement(elementLocator).click();
+        wdUtils.waitAndClick(elementLocator);
         wait.until(visibilityOfElementLocated(FILTER_APPLIED_POPUP));
         wait.until(invisibilityOfElementLocated(FILTER_APPLIED_POPUP));
     }

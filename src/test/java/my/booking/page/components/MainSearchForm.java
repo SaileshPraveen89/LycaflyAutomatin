@@ -9,10 +9,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.inject.Inject;
+import my.booking.utils.WebDriverUtils;
 
 public class MainSearchForm {
 
@@ -46,13 +46,16 @@ public class MainSearchForm {
     private static By SEARCH_BUTTON = cssSelector(".sb-searchbox-universal .sb-searchbox-submit-col button");
 
     private WebDriver webDriver;
+    
+    private WebDriverUtils wdUtils;
 
     private WebDriverWait wait;
 
     @Inject
-    public MainSearchForm(WebDriver webDriver, WebDriverWait wait) {
+    public MainSearchForm(WebDriver webDriver, WebDriverWait wait, WebDriverUtils wdUtils) {
         this.webDriver = webDriver;
         this.wait = wait;
+        this.wdUtils = wdUtils;
     }
 
     public void expectElements() {
@@ -65,12 +68,11 @@ public class MainSearchForm {
     }
 
     public void enterSearchTerm(String searchTerm) {
-        wait.until(visibilityOfElementLocated(SEARCH_BOX));
-        webDriver.findElement(SEARCH_BOX).sendKeys(searchTerm);
+        wdUtils.type(SEARCH_BOX, searchTerm);
         wait.until(visibilityOfElementLocated(SUGGESTIONS_LIST));
         webDriver.findElements(SUGGESTIONS_LIST).stream()
-                .filter(el -> el.getAttribute("data-label").equals(searchTerm)).findFirst()
-                .orElseThrow(NotFoundException::new)
+                .filter(el -> el.getAttribute("data-label").equals(searchTerm))
+                .findFirst().orElseThrow(NotFoundException::new)
                 .click();
         wait.until(invisibilityOfElementLocated(SUGGESTIONS_LIST));
     }
@@ -94,35 +96,27 @@ public class MainSearchForm {
     }
 
     public void setNumberOfAdults(Integer count) {
-        chooseValueFromSelect(ADULTS_SELECT, count.toString());
+        wdUtils.selectValue(ADULTS_SELECT, count.toString());
     }
 
     public void setNumberOfChildren(Integer count) {
-        chooseValueFromSelect(CHILDREN_SELECT, count.toString());
+        wdUtils.selectValue(CHILDREN_SELECT, count.toString());
     }
 
     public void setChildAge(Integer age) {
-        chooseValueFromSelect(CHILD_AGE_SELECT, age.toString());
+        wdUtils.selectValue(CHILD_AGE_SELECT, age.toString());
     }
 
     public void setNumberOfRooms(Integer count) {
-        chooseValueFromSelect(NUMBER_OF_ROOMS, count.toString());
+        wdUtils.selectValue(NUMBER_OF_ROOMS, count.toString());
     }
 
     public void chooseTravelPurposeToWork() {
-        wait.until(visibilityOfElementLocated(TRAVEL_PURPOSE_CHECKBOX));
-        webDriver.findElement(TRAVEL_PURPOSE_CHECKBOX).click();
+        wdUtils.waitAndClick(TRAVEL_PURPOSE_CHECKBOX);
     }
 
     public void submitSearchForm() {
-        wait.until(elementToBeClickable(SEARCH_BUTTON));
-        webDriver.findElement(SEARCH_BUTTON).click();
-    }
-
-    private void chooseValueFromSelect(By selector, String value) {
-        wait.until(visibilityOfElementLocated(selector));
-        new Select(webDriver.findElement(selector)).selectByValue(value);
-        wait.until(textToBePresentInElementValue(selector, value));
+        wdUtils.waitAndClick(SEARCH_BUTTON);
     }
 
 }

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.inject.Inject;
 import my.booking.Currency;
 import my.booking.Language;
+import my.booking.utils.WebDriverUtils;
 
 public class Header {
 
@@ -30,10 +31,13 @@ public class Header {
 
     private WebDriverWait wait;
 
+    private WebDriverUtils wdUtils;
+
     @Inject
-    public Header(WebDriver webDriver, WebDriverWait wait) {
+    public Header(WebDriver webDriver, WebDriverUtils wdUtils, WebDriverWait wait) {
         this.webDriver = webDriver;
         this.wait = wait;
+        this.wdUtils = wdUtils;
     }
 
     public void expectElements() {
@@ -46,15 +50,14 @@ public class Header {
         String currencySelector = String.format("#currency_dropdown_all [data-currency=%s]", currencyDescriptor);
         By currencyLocator = By.cssSelector(currencySelector);
 
-        wait.until(visibilityOfElementLocated(SELECTED_CURRENCY_ANCHOR));
-        webDriver.findElement(SELECTED_CURRENCY_ANCHOR).click();
+        wdUtils.waitAndClick(SELECTED_CURRENCY_ANCHOR);
         wait.until(visibilityOfElementLocated(CURRENCY_POPUP));
         wait.until(visibilityOfElementLocated(currencyLocator));
         WebElement currencyElement = webDriver.findElement(currencyLocator);
 
         String checked = currencyElement.getAttribute("aria-checked");
         if (checked != null && checked.equals("true")) {
-            webDriver.findElement(SELECTED_CURRENCY_ANCHOR).click();
+            wdUtils.waitAndClick(SELECTED_CURRENCY_ANCHOR);
         } else {
             currencyElement.click();
         }
@@ -69,11 +72,9 @@ public class Header {
                 "#current_language_foldout .select_foldout_wrap:nth-of-type(2) [data-lang=%s] a", langDescriptor);
         By langLocator = By.cssSelector(langSelector);
 
-        wait.until(visibilityOfElementLocated(SELECTED_LANGUAGE_ANCHOR));
-        webDriver.findElement(SELECTED_LANGUAGE_ANCHOR).click();
+        wdUtils.waitAndClick(SELECTED_LANGUAGE_ANCHOR);
         wait.until(visibilityOfElementLocated(LANGUAGE_POPUP));
-        wait.until(elementToBeClickable(langLocator));
-        webDriver.findElement(langLocator).click();
+        wdUtils.waitAndClick(langLocator);
         wait.until(invisibilityOfElementLocated(LANGUAGE_POPUP));
         wait.until(attributeContains(SELECTED_LANGUAGE_FLAG_IMAGE, "alt", language));
     }

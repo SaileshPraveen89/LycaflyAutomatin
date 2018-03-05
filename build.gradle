@@ -45,6 +45,7 @@ task runTests(type: Test) {
 
     testLogging {
         events "skipped", "failed", "passed", "standard_out"
+        showStandardStreams = true
     }
 
 }
