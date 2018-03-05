@@ -52,7 +52,8 @@ public class Header {
         wait.until(visibilityOfElementLocated(currencyLocator));
         WebElement currencyElement = webDriver.findElement(currencyLocator);
 
-        if (currencyElement.getAttribute("aria-checked").equals("true")) {
+        String checked = currencyElement.getAttribute("aria-checked");
+        if (checked != null && checked.equals("true")) {
             webDriver.findElement(SELECTED_CURRENCY_ANCHOR).click();
         } else {
             currencyElement.click();
