@@ -48,4 +48,5 @@ This project has integration with travis-ci so each time a new code is pushed to
 ### Possible improvement areas
 - Use [Selenide](http://selenide.org/index.html) which brings better API for UI testing comparing to pure Selenium webdriver;
 - Run browsers in Docker containers and setup remote webdriver to connect them (Test Containers java library could be used for this purpose);
+- After tests being executed on travis-ci upload Cucumber report html file to AWS S3 to be able to view the results online;
 - Try to implement the same functionality using some top-notch JavaScript techniques (like Puppeteer, Cypress.io etc.) 
